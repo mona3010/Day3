@@ -1,0 +1,65 @@
+
+<div class="center">
+    <h1>store name :{{storeName | uppercase}}</h1>
+    <img [src]="productList[0].img" class="img-fluid" alt="image" width="33%">
+
+    <div *ngIf="discountFunc() ; then thenDiscount ; else elseDiscount"></div>
+
+    <ng-template #thenDiscount>
+        <h3>our offer discount {{Discount |percent}}</h3>
+    </ng-template>
+
+    <ng-template #elseDiscount> 
+      <h3>  our offer discount {{Discount | percent}} </h3>
+    </ng-template>
+    <br>
+    <br>
+    <li class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+          <div *ngFor="let cat of categoruList">
+           <li><a class="dropdown-item" href="#">{{cat.name}}</a></li>
+          </div>
+        </ul>
+      </li>
+    <br>
+    <br>
+    <input type="text" placeholder="enter name " [(ngModel)]="clientName"> {{clientName}}
+    <br>
+
+    <!-- <div *ngIf="IsPurshased ; then thenThank  ; else elseTable"></div>     -->
+    <button (click)="hideTable()" type="button" class="btn btn-secondary">BUY</button><br>
+    <ng-template #thenThank>
+        <h3>Thanks for purchasing from our Store {{clientName}} </h3>
+    </ng-template>
+
+    <!-- <ng-template #elseTable> -->
+        <table class="table table-dark" >
+            <thead>
+                <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">id</th>
+                    <th scope="col">price</th>
+                    <th scope="col">quantity</th>
+                    
+                </tr>
+            </thead>
+            <tbody *ngFor="let prod of productList">
+                <tr >
+                    <td>{{prod.name}}</td>
+                    <th scope="row">{{prod.id}}</th>
+                    <td>{{prod.price}}</td>
+                    <td>{{prod.quantity}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    <!-- </ng-template> -->
+
+    
+    <br>
+    <br>
+  
+</div>
