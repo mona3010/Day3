@@ -1,0 +1,28 @@
+<p style="text-align: center;"> Hi, this is products with discount </p>
+
+<div style="text-align: center;">
+    <table class="table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Disciunt</th>
+          </tr>
+      </thead>
+
+      <tbody *ngFor="let product of ProductList">
+        <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name }}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{Discount}}</td>
+      </tr>
+    </tbody>
+
+    </table><br><br>
+
+
+  </div>

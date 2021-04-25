@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DiscountOffers } from 'src/Shared Classes and types/DiscountOffers';
 import { ICategory } from 'src/Shared Classes and types/ICategory';
 import { IProduct } from 'src/Shared Classes and types/IProduct';
+import { ProductServiceService } from '../services/product-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit 
+    {
   Discount:DiscountOffers;
   storeName:string;
   storeLogo:string;
@@ -17,7 +20,7 @@ categoruList:ICategory[];
 clientName:string;
 IsPurchased:boolean;
 
-  constructor()
+  constructor(private productService:ProductServiceService , private router:Router , private activatedroute:ActivatedRoute)
    { 
      this.Discount = DiscountOffers.discount10;
      this.storeName="flower store";
@@ -57,4 +60,32 @@ IsPurchased:boolean;
     return false
   }
 
+  renderValues() 
+  {
+      this.productList=this.productService.GetAllProducts();
+     
+  }
+
+  renderValuesById(id:string):any
+  {​​​​​​​​
+    this.productList=[];
+    var product= this.productService.getProductById(id);
+    if(product!=null)
+    {​​​​​​​​
+       return this.productList.push(product);
+    }​​​​​​​​ 
+
 }
+
+
+ProductsWithDiscount()
+{
+  
+  this.router.navigate(['productwithtDiscount'],{relativeTo:this.activatedroute})
+}
+ProductsWithOutDiscount()
+{
+  this.router.navigate(['productwithOutDiscount'],{relativeTo:this.activatedroute})
+}
+}
+

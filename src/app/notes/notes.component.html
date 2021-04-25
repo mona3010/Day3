@@ -1,0 +1,54 @@
+<p>notes works!</p>
+
+<div class="container">
+    <form [formGroup]="registerForm">
+        <div class="form-group">
+            <label>Name :</label>
+            <input type="text" formControlName="userName" [class.is-invalid]="userName?.invalid && userName?.touched" class="form-control">
+            <div *ngIf="userName?.invalid && userName?.touched">
+                <small class="text-danger" *ngIf="userName?.errors?.required">User Name is required</small>
+                <small class="text-danger" *ngIf="userName?.errors?.forbiddenName">
+                    {{userName?.errors?.forbiddenName.value}}
+                    is not allowed</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <select class="custom-select" [class.is-invalid]="product?.touched && (product?.value === 'Select Product' || product?.value === '')" formControlName="product">
+                <option selected>
+                    Select Product
+                </option>
+                <option *ngFor="let pro of products">{{pro}}
+                </option>
+            </select>
+            <div *ngIf="product?.touched && (product?.value === 'Select Product' || product?.value === '') ">
+                <small class="text-danger" *ngIf="product?.value === '' || product?.value === 'Select Product' || product?.errors?.required ">This Field is required</small>
+            </div>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" formControlName="discount"  class="form-check-input" (click)="setDiscountToRequired()">
+            <label class="form-check-label">
+                Discount
+            </label>
+        </div>
+        <div class="form-group" [ngClass]="discountClass">
+            <label>Discount :</label>
+            <input type="number" formControlName="discountValue" [class.is-invalid]="discountValue?.invalid && discountValue?.touched" class="form-control">
+            <div *ngIf="discountValue?.invalid && discountValue?.touched">
+                <small class="text-danger" *ngIf="discountValue?.errors?.required">Discount is required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Commnent :</label>
+            <input type="text" formControlName="comment" class="form-control">
+        </div>
+        <button (click)="addNewComment()" class="btn btn-success">Add another Email</button>
+        <div class="row mt-2" formArrayName="alternativeComments" *ngFor="let newComment of alternativeComments.controls; let i=index">
+            <label class="col-2 mt-2">Comment number {{i+1}} :</label>
+            <input type="text" class="form-control col-9" [formControlName]="i">
+            <button (click)="removeComment(i)" class="btn btn-danger col-1">Remove</button>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary mt-2" value="Submit">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+
+<p>hi,this is users</p>
+
+<div style="text-align: center;">
+
+
+    <table class="table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+          </tr>
+      </thead>
+      <tbody *ngFor="let user of user">
+          <tr>
+          <td>{{user.name}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+        </tr>
+      </tbody>
+    </table><br><br>
+
+
+  </div>
